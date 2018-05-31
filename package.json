@@ -1,0 +1,27 @@
+{
+    "name": "leucothea",
+    "version": "1.0.0",
+    "description": "stock trend prediction",
+    "private": true,
+    "dependencies": {
+        "ali-rds": "^3.0.1",
+        "isomorphic-fetch": "^2.2.1",
+        "log4js": "^2.8.0",
+        "moment": "^2.22.1"
+    },
+    "devDependencies": {
+        "eslint": "^4.19.1"
+    },
+    "engines": {
+        "node": ">=8.9.0"
+    },
+    "scripts": {
+        "start": "node app"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "author": "Lennon Qian",
+    "license": "MIT"
+}

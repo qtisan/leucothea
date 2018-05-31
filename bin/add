@@ -1,0 +1,42 @@
+
+const { fetchInfo } = require('../scripts/fetch_information');
+const { fetchHistory } = require('../scripts/fetch_history');
+const { computeContinuous } = require('../scripts/compute_continuous');
+const moment = require('moment');
+const { sleep } = require('../lib/utils');
+
+const logger = require('../lib/log');
+
+const getStartDate = listing_date => {
+    return moment(listing_date).isBefore('2000-01-01') ? '2000-01-01' : listing_date;
+};
+
+const add = async code => {
+    const info = await fetchInfo(code);
+    return await fetchHistory(info.stock_code, getStartDate(info.listing_date));
+};
+
+const fetchOneMonth = (code, date) => {
+    fetchHistory(code, date, true).then(r => logger.debug(r))
+        .catch(e => logger.error(e));
+};
+const fetchFrom = (code, date, end) => {
+    fetchHistory(code, date, end).then(r => logger.debug(r))
+        .catch(e => logger.error(e));
+};
+
+// logger.error('it is an error.');
+
+// add('000596');
+
+// fetchOneMonth('000596', '2013-06-05');
+
+// fetchFrom('601086', '2018-05-28');
+
+// fetchFrom('000596', '2017-07-06', '2018-05-30');
+
+// computeContinuous('601086').then(r => logger.debug(r))
+//     .catch(e => logger.error(e));
+
+computeContinuous('601086', '2018-01-01').then(r => logger.debug(r))
+    .catch(e => logger.error(e));
